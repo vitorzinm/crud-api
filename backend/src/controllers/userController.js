@@ -1,6 +1,7 @@
 import { validarCadastroUsuario } from '../service/userService.js'
+import { insereUsuarioNoBanco } from '../repositories/userRepository.js'
 
-export function cadastrarUsuario(req, res) {
+export async function cadastrarUsuario(req, res) {
   const nome = req.body.nome
   const email = req.body.email
 
@@ -10,7 +11,7 @@ export function cadastrarUsuario(req, res) {
     return res.json({ error: 'Envie dados válidos' }).status(400)
   }
 
-  insereUsuarioNoBanco(usuario)
+  await insereUsuarioNoBanco(usuario)
 
   return res
     .json({ success: 'Usuário inserido com sucesso!', user: usuario })

@@ -1,18 +1,22 @@
 import express from 'express'
 import mysql from 'mysql2/promise'
 import dotenv from 'dotenv'
+import router from './src/routes/routes.js'
+import cors from 'cors'
 
 dotenv.config()
 
 const PORT = process.env.PORT || 4000
 const app = express()
 
+app.use(cors({ origin: '*' })) // http://localhost:3000
 app.use(express.json())
+app.use('/', router)
 
 export const connection = await conectarComBanco()
 
 async function conectarComBanco() {
-  mysql.createConnection({
+  return mysql.createConnection({
     host: process.env.HOST,
     port: process.env.DB_PORT,
     user: process.env.USER,
