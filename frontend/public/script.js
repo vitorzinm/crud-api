@@ -55,3 +55,21 @@ document.addEventListener('DOMContentLoaded', () => {
     inputEmail.innerHTML = ''
   }
 })
+
+async function listarUsuarios() {
+  const resposta = await fetch('http://localhost:4000/mostrar')
+  const usuarios = await resposta.json()
+  const tbody = document.getElementById('usuarios')
+
+  usuarios.forEach(usuario => {
+    tbody.innerHTML += `
+            <tr>
+                <td>${usuario.id}</td>
+                <td>${usuario.nome}</td>
+                <td>${usuario.email}</td>
+            </tr>
+        `
+  })
+}
+
+listarUsuarios()
