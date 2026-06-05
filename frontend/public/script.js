@@ -67,7 +67,8 @@ async function listarUsuarios() {
                 <td>${usuario.id}</td>
                 <td>${usuario.nome}</td>
                 <td>${usuario.email}</td>
-                <td><button data-id='${usuario.id}' class='bntDelete'>Delete</button></td>
+                <td><button data-id='${usuario.id}' class='bntDelete'>Delete</button><button class='bntEditar' data-id='${usuario.id}'>Editar</button></td>
+                
             </tr>
      `
   })
