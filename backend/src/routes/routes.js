@@ -13,3 +13,9 @@ router.get('/mostrar', async (req, res) => {
 
   res.json(rows)
 })
+
+router.delete('/usuarios/:id', async (req, res) => {
+  const { id } = req.params
+
+  await connection.execute('DELETE FROM usuarios_api WHERE id = ?', [id])
+})

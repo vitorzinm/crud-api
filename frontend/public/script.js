@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function listarUsuarios() {
   const resposta = await fetch('http://localhost:4000/mostrar')
   const usuarios = await resposta.json()
-  const tbody = document.getElementById('usuarios')
+  const tbody = document.getElementById('tabelaUsuarios')
 
   usuarios.forEach(usuario => {
     tbody.innerHTML += `
@@ -67,8 +67,23 @@ async function listarUsuarios() {
                 <td>${usuario.id}</td>
                 <td>${usuario.nome}</td>
                 <td>${usuario.email}</td>
+                <td><button data-id='${usuario.id}' class='bntDelete'>Delete</button></td>
             </tr>
-        `
+     `
+  })
+  const botoesDelete = document.querySelectorAll('.bntDelete')
+
+  botoesDelete.forEach(botao => {
+    botao.addEventListener('click', () => {
+      console.log(`Botão ${botao.dataset.id} clicado`)
+      deletarUsuario(botao.dataset.id)
+    })
+  })
+}
+
+function deletarUsuario(id) {
+  fetch(`http://localhost:4000/usuarios/${id}`, {
+    method: 'DELETE',
   })
 }
 
