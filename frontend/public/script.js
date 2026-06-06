@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(err => console.error(err))
 
     limparFormulario()
+    location.reload()
   })
 
   function limparFormulario() {
@@ -80,12 +81,52 @@ async function listarUsuarios() {
       deletarUsuario(botao.dataset.id)
     })
   })
+  const botoesEditar = document.querySelectorAll('.bntEditar')
+
+  botoesEditar.forEach(botao => {
+    botao.addEventListener('click', () => {
+      const id = botao.dataset.id
+      const areaEdicao = document.getElementById('areaEdicao')
+
+      areaEdicao.innerHTML = `
+      <h3>Editar Usuário</h3>
+      <input type="text" id="nomeEditar" placeholder="Novo nome">
+      <input type="email" id="emailEditar" placeholder="Novo email">
+      <button id="salvarEdicao">Salvar</button>
+    `
+
+      const salvarEdicao = document.getElementById('salvarEdicao')
+
+      salvarEdicao.addEventListener('click', async () => {
+        const nome = document.getElementById('nomeEditar').value
+        const email = document.getElementById('emailEditar').value
+        const id = botao.dataset.id
+
+        await fetch(`http://localhost:4000/usuarios/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            nome,
+            email,
+          }),
+        })
+
+        alert('Usuário atualizado com sucesso!')
+        location.reload()
+      })
+    })
+  })
 }
 
 function deletarUsuario(id) {
   fetch(`http://localhost:4000/usuarios/${id}`, {
     method: 'DELETE',
   })
+  location.reload()
 }
 
 listarUsuarios()
+
+// listarUsuarios()
