@@ -7,12 +7,27 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h2>Cadastrar Usuarios</h2>
-    <label for="nome">Nome:</label>
-    <input type="text" name="nome" id="nome" />
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email" />
-    <button id="cadastrarUsuario">Cadastrar</button>
+    <div class="container">
+      <h2>Cadastrar Usuarios</h2>
+      <label for="nome">Nome:</label>
+      <input type="text" name="nome" id="nome" />
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" />
+      <button id="cadastrarUsuario">Cadastrar</button>
+      <br />
+      <br />
+      <table>
+        <head>
+          <tr>
+            <th>Id:</th>
+            <th>Nome:</th>
+            <th>Email:</th>
+          </tr>
+        </head>
+        <tbody id="tabelaUsuarios"></tbody>
+      </table>
+    </div>
+    <div id="areaEdicao"></div>
   </body>
   <script src="script.js"></script>
 </html>
